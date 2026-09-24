@@ -556,12 +556,19 @@ button {
 
 .step-number {
   position: absolute;
-  top: 20px;
-  right: 24px;
-  font-size: 3rem;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-terracotta-dark);
+  box-shadow: 0 4px 12px rgba(169, 83, 47, 0.3);
+  font-size: 1.125rem;
   font-weight: 800;
   line-height: 1;
-  color: var(--color-sand);
+  color: var(--color-white);
 }
 
 .step-icon {
