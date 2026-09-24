@@ -39,4 +39,4 @@ node --test tests/
 3. En **Source** elige **Deploy from a branch**, rama `main`, carpeta `/ (root)`, y guarda.
 4. En uno o dos minutos la página queda en `https://<usuario>.github.io/<repositorio>/`.
 
-Después de publicar, cambia en `index.html` la etiqueta `og:image` por la dirección completa, por ejemplo `https://<usuario>.github.io/<repositorio>/img/banner-es.webp`. Así WhatsApp y las redes muestran el banner al compartir el enlace.
+La página está publicada en https://cvegam02.github.io/migratorio/. Si cambia la dirección (por ejemplo, con un dominio propio), actualiza `og:url` y `og:image` en `index.html` para que WhatsApp y las redes sigan mostrando el banner al compartir el enlace.
