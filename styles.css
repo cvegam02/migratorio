@@ -77,6 +77,11 @@ a {
   color: var(--color-terracotta-dark);
 }
 
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 :focus-visible {
   outline: 3px solid var(--color-terracotta);
   outline-offset: 3px;
@@ -282,6 +287,69 @@ a {
   transform: scaleX(1);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-white);
+  color: var(--color-green);
+  cursor: pointer;
+}
+
+.menu-toggle[aria-expanded="true"] {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: grid;
+  padding: 8px var(--gutter) 16px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  animation: menu-in var(--dur-fast) var(--ease-out);
+}
+
+.mobile-menu[hidden] {
+  display: none;
+}
+
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: var(--color-green);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-menu a:last-child {
+  border-bottom: 0;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
 .lang-toggle {
   display: inline-flex;
   align-items: center;
@@ -325,13 +393,13 @@ a {
 
 .hero-image {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: 72% 50%;
 }
 
 .hero-inner {
-  padding-block: 32px 48px;
+  padding-block: 28px 36px;
 }
 
 .hero h1 {
@@ -349,17 +417,23 @@ a {
 .stats {
   background: var(--color-green);
   color: var(--color-white);
-  padding-block: 36px;
+  padding-block: 28px;
 }
 
 .stats-grid {
   display: grid;
-  gap: 24px;
-  text-align: center;
+  gap: 16px;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  align-items: center;
+  gap: 12px;
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 800;
   line-height: 1.1;
   color: var(--color-sand);
@@ -373,7 +447,7 @@ a {
 
 /* ---------- Secciones ---------- */
 .section {
-  padding-block: 64px;
+  padding-block: 48px;
 }
 
 .section-sand {
@@ -382,7 +456,7 @@ a {
 
 .section-header {
   max-width: 44rem;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .section-header h2,
@@ -400,7 +474,7 @@ a {
 
 /* ---------- Servicios ---------- */
 .service-group + .service-group {
-  margin-top: 40px;
+  margin-top: 32px;
 }
 
 .group-title {
@@ -416,11 +490,15 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 16px;
+  gap: 12px;
 }
 
 .card {
-  padding: 24px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 14px;
+  align-items: start;
+  padding: 16px;
   background: var(--color-sand-light);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -435,10 +513,10 @@ a {
 }
 
 .card-icon {
+  grid-row: span 2;
   width: 44px;
   height: 44px;
   padding: 10px;
-  margin-bottom: 16px;
   border-radius: 12px;
   background: var(--color-white);
   color: var(--color-terracotta);
@@ -446,9 +524,9 @@ a {
 }
 
 .card h4 {
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .card p {
@@ -462,13 +540,13 @@ a {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 20px;
+  gap: 12px;
   counter-reset: none;
 }
 
 .step {
   position: relative;
-  padding: 28px 24px 24px;
+  padding: 20px;
   background: var(--color-white);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -504,12 +582,12 @@ a {
 /* ---------- Sobre mí ---------- */
 .about {
   display: grid;
-  gap: 32px;
+  gap: 24px;
   align-items: center;
 }
 
 .about-photo {
-  max-width: 320px;
+  max-width: 200px;
   margin-inline: auto;
 }
 
@@ -578,15 +656,30 @@ a {
   box-shadow: none;
 }
 
-.contact .btn {
-  word-break: break-all;
+.btn-contact {
+  justify-content: flex-start;
+  padding-block: 12px;
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.btn-detail {
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 /* ---------- Pie ---------- */
 .site-footer {
   background: var(--color-green-deep);
   color: rgba(255, 255, 255, 0.8);
-  padding-block: 32px 96px;
+  padding-block: 32px calc(100px + env(safe-area-inset-bottom, 0px));
   font-size: 0.875rem;
 }
 
@@ -601,13 +694,47 @@ a {
   color: var(--color-white);
 }
 
-/* ---------- Botón flotante de WhatsApp ---------- */
+/* ---------- Barra fija de WhatsApp (celular) ---------- */
+.cta-bar {
+  position: fixed;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--color-terracotta-dark);
+  color: var(--color-white);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  transform: translateY(calc(100% + 24px));
+  visibility: hidden;
+  transition: transform 300ms var(--ease-out), visibility 0s linear 300ms;
+}
+
+.cta-bar.is-visible {
+  transform: none;
+  visibility: visible;
+  transition: transform 300ms var(--ease-out), visibility 0s;
+}
+
+.cta-bar:active {
+  background: var(--color-terracotta-deep);
+}
+
+/* ---------- Botón flotante de WhatsApp (escritorio) ---------- */
 .whatsapp-float {
+  display: none;
   position: fixed;
   right: var(--gutter);
   bottom: calc(var(--gutter) + env(safe-area-inset-bottom, 0px));
   z-index: 40;
-  display: grid;
   place-items: center;
   width: 56px;
   height: 56px;
@@ -704,12 +831,47 @@ a {
     justify-content: center;
   }
 
-  .contact .btn {
-    word-break: normal;
+  .stats {
+    padding-block: 36px;
   }
 
   .stats-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .stat {
+    display: block;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .section {
+    padding-block: 64px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .card {
+    display: block;
+    padding: 24px;
+  }
+
+  .card-icon {
+    margin-bottom: 16px;
+  }
+
+  .about-photo {
+    max-width: 320px;
+  }
+
+  .hero-image {
+    aspect-ratio: 4 / 3;
   }
 
   .cards {
@@ -730,6 +892,16 @@ a {
   .main-nav {
     display: flex;
     gap: 28px;
+  }
+
+  .menu-toggle,
+  .mobile-menu,
+  .cta-bar {
+    display: none !important;
+  }
+
+  .whatsapp-float {
+    display: grid;
   }
 
   .cards {

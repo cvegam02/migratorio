@@ -39,6 +39,7 @@
     <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-laptop" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
   </svg>
 
@@ -56,11 +57,23 @@
         <a href="#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About me</span></a>
         <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
       </nav>
-      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch to English">
-        <span data-lang-option="es" class="is-active">ES</span>
-        <span data-lang-option="en">EN</span>
-      </button>
+      <div class="header-actions">
+        <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch to English">
+          <span data-lang-option="es" class="is-active">ES</span>
+          <span data-lang-option="en">EN</span>
+        </button>
+        <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+          <span class="visually-hidden"><span lang="es">Menú</span><span lang="en">Menu</span></span>
+        </button>
+      </div>
     </div>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Menú" hidden>
+      <a href="#servicios"><span lang="es">Servicios</span><span lang="en">Services</span></a>
+      <a href="#como-funciona"><span lang="es">Cómo funciona</span><span lang="en">How it works</span></a>
+      <a href="#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About me</span></a>
+      <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
   </header>
 
   <main id="main">
@@ -77,7 +90,7 @@
             <span lang="es">Revisión gratuita de tu caso y cotización sin compromiso. 8 años de experiencia en el Instituto Nacional de Migración.</span>
             <span lang="en">Free case review and a no-obligation quote. 8 years of experience at Mexico's National Immigration Institute.</span>
           </p>
-          <div class="cta-row" data-reveal style="--i:3">
+          <div id="hero-cta" class="cta-row" data-reveal style="--i:3">
             <a class="btn btn-primary" data-contact="whatsapp" href="https://wa.me/526647358258" target="_blank" rel="noopener">
               <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
               <span lang="es">Revisión gratuita por WhatsApp</span><span lang="en">Free review on WhatsApp</span>
@@ -257,13 +270,19 @@
         <h2><span lang="es">¿Listo para empezar?</span><span lang="en">Ready to get started?</span></h2>
         <p class="lead"><span lang="es">Cuéntame tu caso. La revisión es gratuita y la cotización, sin compromiso.</span><span lang="en">Tell me about your case. The review is free and the quote comes with no obligation.</span></p>
         <div class="cta-row cta-center">
-          <a class="btn btn-primary btn-on-dark" data-contact="whatsapp" href="https://wa.me/526647358258" target="_blank" rel="noopener">
+          <a class="btn btn-primary btn-on-dark btn-contact" data-contact="whatsapp" href="https://wa.me/526647358258" target="_blank" rel="noopener">
             <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
-            <span>WhatsApp: +52 664 735 8258</span>
+            <span class="btn-text">
+              <span class="btn-label">WhatsApp</span>
+              <span class="btn-detail">+52 664 735 8258</span>
+            </span>
           </a>
-          <a class="btn btn-ghost" data-contact="email" href="mailto:migratoriosmxs@gmail.com">
+          <a class="btn btn-ghost btn-contact" data-contact="email" href="mailto:migratoriosmxs@gmail.com">
             <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
-            <span>migratoriosmxs@gmail.com</span>
+            <span class="btn-text">
+              <span class="btn-label"><span lang="es">Correo</span><span lang="en">Email</span></span>
+              <span class="btn-detail">migratoriosmxs@gmail.com</span>
+            </span>
           </a>
         </div>
       </div>
@@ -277,6 +296,11 @@
       <p class="copyright">© <span id="year">2026</span> Anait Ceja</p>
     </div>
   </footer>
+
+  <a class="cta-bar" data-contact="whatsapp" href="https://wa.me/526647358258" target="_blank" rel="noopener">
+    <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+    <span lang="es">Revisión gratuita por WhatsApp</span><span lang="en">Free review on WhatsApp</span>
+  </a>
 
   <a class="whatsapp-float" data-contact="whatsapp" href="https://wa.me/526647358258" target="_blank" rel="noopener">
     <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>

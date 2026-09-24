@@ -38,6 +38,16 @@ function countValue(target, progress) {
   return Math.round(target * (1 - Math.pow(1 - p, 3)));
 }
 
+// La barra fija de WhatsApp (celular) no repite botones que ya están en pantalla.
+function ctaBarVisible({ heroCta, contact }) {
+  return !heroCta && !contact;
+}
+
+// Estado del menú móvil tras un evento: "toggle", "escape", "navigate" u "outside".
+function nextMenuOpen(isOpen, event) {
+  return event === "toggle" ? !isOpen : false;
+}
+
 function readStoredLang() {
   try {
     return localStorage.getItem(STORAGE_KEY);
@@ -123,6 +133,50 @@ function setupHeader() {
   update();
 }
 
+function setupMenu() {
+  const button = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  if (!button || !menu) return;
+  let open = false;
+
+  const update = (event) => {
+    open = nextMenuOpen(open, event);
+    menu.hidden = !open;
+    button.setAttribute("aria-expanded", String(open));
+  };
+
+  button.addEventListener("click", () => update("toggle"));
+  menu.addEventListener("click", (event) => {
+    if (event.target.closest("a")) update("navigate");
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && open) {
+      update("escape");
+      button.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (open && !menu.contains(event.target) && !button.contains(event.target)) update("outside");
+  });
+}
+
+function setupCtaBar() {
+  const bar = document.querySelector(".cta-bar");
+  const heroCta = document.getElementById("hero-cta");
+  const contact = document.getElementById("contacto");
+  if (!bar || !heroCta || !contact || !("IntersectionObserver" in window)) return;
+  const seen = { heroCta: true, contact: false };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      seen[entry.target === heroCta ? "heroCta" : "contact"] = entry.isIntersecting;
+    });
+    bar.classList.toggle("is-visible", ctaBarVisible(seen));
+  });
+  observer.observe(heroCta);
+  observer.observe(contact);
+}
+
 function init() {
   // Solo se oculta contenido para animarlo si este script realmente corre.
   document.documentElement.classList.add("reveal-ready");
@@ -143,10 +197,12 @@ function init() {
 
   setupReveal();
   setupHeader();
+  setupMenu();
+  setupCtaBar();
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { pickLang, whatsappUrl, mailtoUrl, countValue };
+  module.exports = { pickLang, whatsappUrl, mailtoUrl, countValue, ctaBarVisible, nextMenuOpen };
 } else {
   document.addEventListener("DOMContentLoaded", init);
 }
