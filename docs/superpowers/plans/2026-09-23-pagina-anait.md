@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Página estática bilingüe (ES/EN) de servicios de migración de Anait, lista para GitHub Pages.
+**Goal:** Página estática bilingüe (ES/EN) de "Anait Ceja · Gestoría Migratoria / Mexico Expat Services", lista para GitHub Pages.
 
 **Architecture:** Un `index.html` con todos los textos en ambos idiomas (`<span lang="es">` / `<span lang="en">`), un `styles.css` que oculta el idioma inactivo según `html[data-lang]`, y un `script.js` clásico con funciones puras (probadas con `node:test`) más un `init()` que conecta el DOM.
 
@@ -15,8 +15,10 @@
 - Sin frameworks, sin build, sin dependencias de producción; máximo una fuente de Google Fonts.
 - Idiomas: `es` (por defecto) y `en`; sin JS la página se ve en español.
 - WhatsApp y correo definidos una sola vez, en constantes al inicio de `script.js`.
-- Textos de ejemplo: no decir que Anait es abogada ni prometer resultados; pie con aviso "No soy abogada; no ofrezco asesoría legal" / "I am not an attorney; I do not provide legal advice".
-- Mobile-first, márgenes laterales de 16 px en celular, colores en variables `:root`.
+- Contenido real según la sección "El negocio", "Servicios" y "Secciones de la página" del spec; respetar sus "Reglas de contenido" (no abogada, no prometer resultados, no "contactos", no explicar cómo atiende en inglés, sin precios).
+- Pie: "Gestoría migratoria. No somos un despacho de abogados." / "Immigration paperwork services. We are not a law firm."
+- WhatsApp `526647358258`, correo `migratoriosmxs@gmail.com`.
+- Estilo: blanco/arena, acento terracota, secundario verde oscuro, sans-serif; mobile-first, márgenes de 16 px, colores en `:root`, contraste AA.
 - No abrir el navegador: la validación visual la hace el usuario.
 
 ## Review Focus
@@ -93,8 +95,8 @@ test("mailtoUrl codifica el asunto", () => {
 **Interfaces:**
 - Consumes: `script.js` espera `#lang-toggle`, `a[data-contact="whatsapp"]`, `a[data-contact="email"]`, y `<html data-lang="es" lang="es">`.
 
-- [ ] **Step 1: `index.html`** — `<html lang="es" data-lang="es">`; encabezado con nombre y botón `#lang-toggle` (ES/EN); secciones `#inicio`, `#servicios` (6 tarjetas: visas, residencia permanente, ciudadanía, permisos de trabajo, reunificación familiar, formularios), `#sobre-mi` (imagen `img/anait.svg` con `alt`), `#contacto` (WhatsApp, correo, zona); pie con año y aviso legal. Cada texto visible en `<span lang="es">`/`<span lang="en">`. Enlaces de contacto con `href` de respaldo (`https://wa.me/15551234567`, `mailto:anait@example.com`) y `data-contact`. Meta viewport, description, `<script src="script.js" defer>`.
-- [ ] **Step 2: `styles.css`** — variables en `:root`; `html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none; }` (excluyendo el propio `<html>`); layout mobile-first con `padding-inline: 16px`, grid de tarjetas que pasa a 2–3 columnas en pantallas anchas; botones de contacto grandes y con contraste AA.
+- [ ] **Step 1: `index.html`** — `<html lang="es" data-lang="es">`; encabezado con nombre y botón `#lang-toggle` (ES/EN); secciones `#inicio`, `#servicios` (11 servicios en 3 grupos, textos del spec), `#como-funciona` (3 pasos), `#sobre-mi` (imagen `img/anait.svg` con `alt`, bio del spec), `#contacto` (WhatsApp, correo, revisión gratuita); pie con año y aviso. Cada texto visible en `<span lang="es">`/`<span lang="en">`. Enlaces de contacto con `href` de respaldo (`https://wa.me/526647358258`, `mailto:migratoriosmxs@gmail.com`) y `data-contact`. Meta viewport, description, `<script src="script.js" defer>`.
+- [ ] **Step 2: `styles.css`** — variables en `:root` (blanco, arena, terracota, verde oscuro); `html[data-lang="es"] [lang="en"], html[data-lang="en"] [lang="es"] { display: none; }` (excluyendo el propio `<html>`); layout mobile-first con `padding-inline: 16px`, grid de tarjetas que pasa a 2–3 columnas en pantallas anchas; botones de contacto grandes y con contraste AA.
 - [ ] **Step 3: `img/anait.svg`** — silueta genérica como placeholder.
 - [ ] **Step 4: `README.md`** — qué editar (constantes en `script.js`, textos en `index.html`, foto en `img/`) y cómo publicar en GitHub Pages. `.nojekyll` vacío.
 - [ ] **Step 5: Validar** — `npx --yes html-validate index.html` → sin errores; `node --test tests/` → PASS.
