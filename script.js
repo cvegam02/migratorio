@@ -1,36 +1,4 @@
-// Datos de contacto. Si los cambias, cambia también los enlaces y textos de
-// respaldo en index.html (busca 526647358258 y migratoriosmxs).
-const WHATSAPP_NUMBER = "+52 664 735 8258";
-const EMAIL = "migratoriosmxs@gmail.com";
-
-const MESSAGES = {
-  es: {
-    whatsapp: "Hola Anait, me gustaría una revisión gratuita de mi caso migratorio.",
-    subject: "Revisión gratuita de mi caso migratorio",
-  },
-  en: {
-    whatsapp: "Hi Anait, I'd like a free review of my immigration case.",
-    subject: "Free review of my immigration case",
-  },
-};
-
-const LANGS = ["es", "en"];
-const STORAGE_KEY = "lang";
 const COUNT_DURATION_MS = 1200;
-
-function pickLang(stored, browserLang) {
-  if (LANGS.includes(stored)) return stored;
-  return String(browserLang || "").toLowerCase().startsWith("en") ? "en" : "es";
-}
-
-function whatsappUrl(number, message) {
-  const digits = String(number).replace(/\D/g, "");
-  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
-}
-
-function mailtoUrl(email, subject) {
-  return `mailto:${email}?subject=${encodeURIComponent(subject)}`;
-}
 
 // Valor del contador animado para un avance entre 0 y 1 (ease-out cúbico).
 function countValue(target, progress) {
@@ -46,44 +14,6 @@ function ctaBarVisible({ heroCta, contact }) {
 // Estado del menú móvil tras un evento: "toggle", "escape", "navigate" u "outside".
 function nextMenuOpen(isOpen, event) {
   return event === "toggle" ? !isOpen : false;
-}
-
-function readStoredLang() {
-  try {
-    return localStorage.getItem(STORAGE_KEY);
-  } catch (error) {
-    return null;
-  }
-}
-
-function storeLang(lang) {
-  try {
-    localStorage.setItem(STORAGE_KEY, lang);
-  } catch (error) {
-    // Almacenamiento bloqueado (modo privado): el idioma no se recuerda.
-  }
-}
-
-function applyLang(lang) {
-  const root = document.documentElement;
-  const text = MESSAGES[lang];
-  root.dataset.lang = lang;
-  root.lang = lang;
-
-  document.querySelectorAll('a[data-contact="whatsapp"]').forEach((link) => {
-    link.href = whatsappUrl(WHATSAPP_NUMBER, text.whatsapp);
-  });
-  document.querySelectorAll('a[data-contact="email"]').forEach((link) => {
-    link.href = mailtoUrl(EMAIL, text.subject);
-  });
-
-  const toggle = document.getElementById("lang-toggle");
-  if (toggle) {
-    toggle.querySelectorAll("[data-lang-option]").forEach((option) => {
-      option.classList.toggle("is-active", option.dataset.langOption === lang);
-    });
-    toggle.setAttribute("aria-label", lang === "es" ? "Switch to English" : "Cambiar a español");
-  }
 }
 
 function prefersReducedMotion() {
@@ -180,17 +110,6 @@ function setupCtaBar() {
 function init() {
   // Solo se oculta contenido para animarlo si este script realmente corre.
   document.documentElement.classList.add("reveal-ready");
-  let lang = pickLang(readStoredLang(), navigator.language);
-  applyLang(lang);
-
-  const toggle = document.getElementById("lang-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      lang = lang === "es" ? "en" : "es";
-      applyLang(lang);
-      storeLang(lang);
-    });
-  }
 
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
@@ -202,7 +121,7 @@ function init() {
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { pickLang, whatsappUrl, mailtoUrl, countValue, ctaBarVisible, nextMenuOpen };
+  module.exports = { countValue, ctaBarVisible, nextMenuOpen };
 } else {
   document.addEventListener("DOMContentLoaded", init);
 }

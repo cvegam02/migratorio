@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const read = (file) => fs.readFileSync(path.join(__dirname, "..", file), "utf8");
-const html = read("index.html");
+const html = read("src/index.html");
 const css = read("styles.css");
 const js = read("script.js");
 

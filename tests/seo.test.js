@@ -36,8 +36,9 @@ test("los datos estructurados listan los 11 servicios", () => {
 
 test("existe un sitemap con la dirección de la página", () => {
   const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
-  assert.match(sitemap, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
+  assert.match(sitemap, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/);
   assert.match(sitemap, new RegExp(`<loc>${SITE_URL}</loc>`));
+  assert.match(sitemap, new RegExp(`<loc>${SITE_URL}en/</loc>`));
 });
 
 test("los documentos internos no se publican", () => {

@@ -27,12 +27,6 @@
   --gutter: 16px;
 }
 
-/* ---------- Idiomas ---------- */
-html[data-lang="es"] [lang="en"],
-html[data-lang="en"] [lang="es"] {
-  display: none;
-}
-
 /* ---------- Base ---------- */
 *,
 *::before,
@@ -358,6 +352,7 @@ button {
   font: inherit;
   font-size: 0.875rem;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
 }
 
