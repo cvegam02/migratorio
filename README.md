@@ -40,3 +40,9 @@ node --test tests/
 4. En uno o dos minutos la página queda en `https://<usuario>.github.io/<repositorio>/`.
 
 La página está publicada en https://cvegam02.github.io/migratorio/. Si cambia la dirección (por ejemplo, con un dominio propio), actualiza `og:url` y `og:image` en `index.html` para que WhatsApp y las redes sigan mostrando el banner al compartir el enlace.
+
+## Google (SEO)
+
+- `index.html` incluye la dirección canónica y datos estructurados del negocio (`application/ld+json`). Si cambian el teléfono, el correo o los servicios, actualízalos también ahí.
+- `sitemap.xml` lista la página; actualiza `<lastmod>` cuando hagas cambios importantes.
+- Para dar de alta la página: entra a [Google Search Console](https://search.google.com/search-console), agrega la propiedad con prefijo de URL `https://cvegam02.github.io/migratorio/` y envía el sitemap `https://cvegam02.github.io/migratorio/sitemap.xml`.
