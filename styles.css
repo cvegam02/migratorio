@@ -139,7 +139,7 @@ a {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-terracotta-dark);
+  color: var(--color-terracotta-deep);
   margin-bottom: 12px;
 }
 
@@ -629,26 +629,26 @@ a {
 }
 
 /* ---------- Animaciones al hacer scroll ---------- */
-.js [data-reveal] {
+.reveal-ready [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
   transition-delay: calc(var(--i, 0) * 80ms);
 }
 
-.js [data-reveal].is-visible {
+.reveal-ready [data-reveal].is-visible {
   opacity: 1;
   transform: none;
 }
 
 /* La tarjeta ya visible usa su propia transición rápida para el hover. */
-.js .card[data-reveal].is-visible {
+.reveal-ready .card[data-reveal].is-visible {
   transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) ease,
     border-color var(--dur-fast) ease, opacity var(--dur-reveal) var(--ease-out);
   transition-delay: 0ms;
 }
 
-.js .hero-image {
+.reveal-ready .hero-image {
   animation: hero-zoom 1.6s var(--ease-out) both;
 }
 
@@ -675,9 +675,21 @@ a {
     transition: none !important;
   }
 
-  .js [data-reveal] {
+  .reveal-ready [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+}
+
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .site-header,
+  .whatsapp-float {
+    position: static;
   }
 }
 

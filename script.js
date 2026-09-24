@@ -1,4 +1,5 @@
-// Datos de contacto: cámbialos aquí y se actualizan en toda la página.
+// Datos de contacto. Si los cambias, cambia también los enlaces y textos de
+// respaldo en index.html (busca 526647358258 y migratoriosmxs).
 const WHATSAPP_NUMBER = "+52 664 735 8258";
 const EMAIL = "migratoriosmxs@gmail.com";
 
@@ -123,6 +124,8 @@ function setupHeader() {
 }
 
 function init() {
+  // Solo se oculta contenido para animarlo si este script realmente corre.
+  document.documentElement.classList.add("reveal-ready");
   let lang = pickLang(readStoredLang(), navigator.language);
   applyLang(lang);
 
