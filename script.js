@@ -1,4 +1,16 @@
 const COUNT_DURATION_MS = 1200;
+const SUGGEST_DISMISSED_KEY = "langSuggestDismissed";
+
+// Idioma a sugerir según el idioma principal del navegador, o null si no hace falta.
+// En la página en español se sugiere inglés a cualquier navegador que no esté en español;
+// en la página en inglés solo se sugiere español a navegadores en español.
+function suggestLanguage(pageLang, browserLangs, dismissed) {
+  const primary = String((browserLangs || [])[0] || "").toLowerCase();
+  if (dismissed || !primary) return null;
+  const browserIsSpanish = primary.startsWith("es");
+  if (pageLang === "es") return browserIsSpanish ? null : "en";
+  return browserIsSpanish ? "es" : null;
+}
 
 // Valor del contador animado para un avance entre 0 y 1 (ease-out cúbico).
 function countValue(target, progress) {
@@ -14,6 +26,35 @@ function ctaBarVisible({ heroCta, contact }) {
 // Estado del menú móvil tras un evento: "toggle", "escape", "navigate" u "outside".
 function nextMenuOpen(isOpen, event) {
   return event === "toggle" ? !isOpen : false;
+}
+
+function readDismissed() {
+  try {
+    return localStorage.getItem(SUGGEST_DISMISSED_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+}
+
+function storeDismissed() {
+  try {
+    localStorage.setItem(SUGGEST_DISMISSED_KEY, "1");
+  } catch (error) {
+    // Almacenamiento bloqueado (modo privado): el aviso puede volver a salir.
+  }
+}
+
+function setupLangSuggest() {
+  const banner = document.querySelector(".lang-suggest");
+  if (!banner) return;
+  const browserLangs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+  const target = suggestLanguage(document.documentElement.lang, browserLangs, readDismissed());
+  if (target !== banner.dataset.suggestLang) return;
+  banner.hidden = false;
+  banner.querySelector(".lang-suggest-close").addEventListener("click", () => {
+    banner.hidden = true;
+    storeDismissed();
+  });
 }
 
 function prefersReducedMotion() {
@@ -118,10 +159,11 @@ function init() {
   setupHeader();
   setupMenu();
   setupCtaBar();
+  setupLangSuggest();
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { countValue, ctaBarVisible, nextMenuOpen };
+  module.exports = { countValue, ctaBarVisible, nextMenuOpen, suggestLanguage };
 } else {
   document.addEventListener("DOMContentLoaded", init);
 }

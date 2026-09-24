@@ -203,6 +203,57 @@ button {
   gap: 12px;
 }
 
+/* ---------- Aviso de idioma ---------- */
+.lang-suggest {
+  background: var(--color-green);
+  color: var(--color-white);
+  font-size: 0.9375rem;
+}
+
+.lang-suggest[hidden] {
+  display: none;
+}
+
+.lang-suggest-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+}
+
+.lang-suggest p {
+  padding-block: 8px;
+}
+
+.lang-suggest a {
+  color: var(--color-white);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+.lang-suggest-close {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.lang-suggest-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.lang-suggest :focus-visible {
+  outline-color: var(--color-white);
+}
+
 /* ---------- Encabezado ---------- */
 .site-header {
   position: sticky;

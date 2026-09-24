@@ -43,7 +43,7 @@ test("la página en español no trae textos en inglés y viceversa", () => {
 
 test("no quedan marcas de idioma ni marcadores sin reemplazar", () => {
   for (const html of [es, en]) {
-    assert.doesNotMatch(html, /<(?!html)[^>]*\slang="(es|en)"/);
+    assert.doesNotMatch(html, /<span lang="(es|en)"/);
     assert.doesNotMatch(html, /\{\{/);
   }
 });

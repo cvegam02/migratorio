@@ -60,6 +60,9 @@ const TEXT = {
     switchLabel: "English version",
     otherHref: "en/",
     otherLang: "en",
+    suggestText: "This page is available in English.",
+    suggestCta: "View in English",
+    suggestClose: "Close",
   },
   en: {
     base: "../",
@@ -82,6 +85,9 @@ const TEXT = {
     switchLabel: "Versión en español",
     otherHref: "../",
     otherLang: "es",
+    suggestText: "Esta página está disponible en español.",
+    suggestCta: "Ver en español",
+    suggestClose: "Cerrar",
   },
 };
 
