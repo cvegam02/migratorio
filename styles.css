@@ -386,20 +386,22 @@ button {
   overflow: hidden;
 }
 
-/* En celular el texto y los botones van primero; la ilustración debajo. */
+/* En celular la imagen va arriba, recortada al tema y fundida con el fondo. */
 .hero-image {
-  order: 1;
+  -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent);
+  mask-image: linear-gradient(to bottom, #000 65%, transparent);
 }
 
 .hero-image {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  object-position: 72% 50%;
+  object-position: 88% 45%;
 }
 
 .hero-inner {
-  padding-block: 28px 36px;
+  margin-top: -24px;
+  padding-block: 0 36px;
 }
 
 .hero h1 {
@@ -871,7 +873,8 @@ button {
   }
 
   .hero-image {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
+    object-position: 75% 50%;
   }
 
   .cards {
@@ -947,12 +950,15 @@ button {
     inset: 0;
     height: 100%;
     aspect-ratio: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
     object-position: 85% 50%;
   }
 
   .hero-inner {
     position: relative;
     z-index: 2;
+    margin-top: 0;
     padding-block: 80px;
   }
 
