@@ -146,7 +146,9 @@ function buildPage(source, lang) {
     if (!(key in values)) throw new Error(`Marcador sin valor: ${match}`);
     return raw.has(key) ? values[key] : escapeAttr(values[key]);
   });
-  return keepLanguage(filled, lang).replace(/^<!-- Fuente bilingüe.*\n/m, "");
+  return keepLanguage(filled, lang)
+    .replace(/^<!-- Fuente bilingüe.*\n/m, "")
+    .replace(/^.*<!-- solo-fuente -->\n/gm, "");
 }
 
 function build(root = __dirname) {

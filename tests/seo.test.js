@@ -54,3 +54,18 @@ test("GitHub Pages usa el dominio propio", () => {
 test("no quedan direcciones viejas de github.io en la página", () => {
   assert.doesNotMatch(html, /github\.io/);
 });
+
+test("robots.txt bloquea los archivos internos y apunta al sitemap", () => {
+  const robots = fs.readFileSync(path.join(root, "robots.txt"), "utf8");
+  assert.match(robots, /^Disallow: \/src\/$/m);
+  assert.match(robots, /^Disallow: \/tests\/$/m);
+  assert.match(robots, /^Sitemap: https:\/\/migratoriosmx\.com\/sitemap\.xml$/m);
+});
+
+test("la plantilla no se indexa pero las páginas publicadas sí", () => {
+  const source = fs.readFileSync(path.join(root, "src/index.html"), "utf8");
+  const en = fs.readFileSync(path.join(root, "en/index.html"), "utf8");
+  assert.match(source, /<meta name="robots" content="noindex">/);
+  assert.doesNotMatch(html, /noindex/);
+  assert.doesNotMatch(en, /noindex/);
+});

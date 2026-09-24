@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /src/
+Disallow: /tests/
+Disallow: /img/hero%202.webp
+
+Sitemap: https://migratoriosmx.com/sitemap.xml
