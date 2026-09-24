@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const SITE_URL = "https://cvegam02.github.io/migratorio/";
+const SITE_URL = "https://migratoriosmx.com/";
 const root = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 
@@ -43,4 +43,13 @@ test("existe un sitemap con la dirección de la página", () => {
 test("los documentos internos no se publican", () => {
   const ignore = fs.readFileSync(path.join(root, ".gitignore"), "utf8");
   assert.match(ignore, /^docs\/$/m);
+});
+
+test("GitHub Pages usa el dominio propio", () => {
+  const cname = fs.readFileSync(path.join(root, "CNAME"), "utf8").trim();
+  assert.equal(cname, "migratoriosmx.com");
+});
+
+test("no quedan direcciones viejas de github.io en la página", () => {
+  assert.doesNotMatch(html, /github\.io/);
 });
