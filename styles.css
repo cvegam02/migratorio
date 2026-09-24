@@ -427,7 +427,7 @@ button {
 
 .stat {
   display: grid;
-  grid-template-columns: 7.5rem 1fr;
+  grid-template-columns: 9.5rem 1fr;
   align-items: center;
   gap: 12px;
 }
